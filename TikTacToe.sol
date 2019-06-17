@@ -2,7 +2,7 @@ pragma solidity >=0.4.22 <0.6.0;
 
 contract MyfirstContract {
     int[3][3] board;
-    string public winner_game;
+    bytes32 public winner_game;
     address player1; address player2;
     constructor() public{
         player1=msg.sender;
@@ -26,11 +26,10 @@ contract MyfirstContract {
        return board;
    }
    
-function makemove(int player_number,uint8 x,uint8 y)public returns(string memory)
+function makemove(int player_number,uint8 x,uint8 y)public returns(bytes32)
 {
-    /*string storage  m=whowonthegame();
-    if(keccak256(whowonthegame())==keccak256(""))
-    return "Match Draw!";*/
+    if(whowonthegame()!="Match is going on")
+    return whowonthegame();
     
     if(board[x][y]!=0)
     return "already occupied";
@@ -41,7 +40,7 @@ function makemove(int player_number,uint8 x,uint8 y)public returns(string memory
           board[x][y]=2;
     return "Move made successfully";
 }
-function whowonthegame() public returns(string memory)
+function whowonthegame() public returns(bytes32 )
 {
     int winner = checksuccess();
     if(winner ==1)
@@ -99,5 +98,4 @@ function checksuccess()public view returns(int)
         return 3;
     return 4;
 }       
-
 }
