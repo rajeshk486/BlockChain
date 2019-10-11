@@ -5,15 +5,7 @@ const App = {
   web3: null,
   account: null,
   meta: null,
-  sendmsg: async function()
-  {
-    console.log('inside sendmsg');
-    const { sendmsg } = this.meta.methods;
-    const balance1 =await sendmsg().send({ from: this.account });
-    //await sendmsg().call();
-    console.log(balance1);
 
-  },
   start: async function() {
     const { web3 } = this;
 
